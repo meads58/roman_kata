@@ -7,6 +7,7 @@ class RomanConverter
     @tens = {1 => 'X', 5 => 'L'}
     @hundreds = {1 => 'C', 5 => 'D'}
     @thousands = {1 => 'M'}
+    @hash_mapper = [@ones, @tens, @hundreds, @thousands]
     @split_number = []
     @roman_numeral = []
     @roman_mapper = { 1 => 'I', 2 => 'II', 3 => 'III', 4 => 'IV', 5 => 'V', 6 => 'VI', 7 => 'VII', 8 => 'VIII', 9 => 'IX', 10 => 'X'}
@@ -28,15 +29,24 @@ class RomanConverter
   def rules num, index
     case index
     when 0
-      roman_builder(num, @ones)
+      roman_builder(num, @hash_mapper[index])
     when 1
-      roman_builder(num, @tens)
+      roman_builder(num, @hash_mapper[index])
     end
   end
 
   def roman_builder num, mapping
-    if num < 4 then
+    case num
+    when 0..3
       num.times { @roman_numeral.push(mapping[1]) }
+    when 4
+      @roman_numeral.push(mapping[1] + mapping[5])
+    when 5..8
+      @roman_numeral.push(mapping[5])
+      (num - 5).times { @roman_numeral.push(mapping[1]) }
+    when 9
+      @roman_numeral.push(mapping[1])
+
     end
   end
 

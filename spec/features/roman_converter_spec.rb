@@ -52,10 +52,11 @@ describe RomanConverter do
     end
   end
 
-  context 'Selecting the correct hash mapping for ones, tens, hundreds, thousands' do
-    it '' do
-    end
-  end
+  # context 'Selecting the correct hash mapping for ones, tens, hundreds, thousands' do
+  #   it 'knows to use the ones hash table when the numbers index is 0' do
+
+  #   end
+  # end
 
   end
 
